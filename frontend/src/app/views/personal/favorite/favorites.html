@@ -1,0 +1,70 @@
+<div class="favorite">
+  <div class="container">
+    <h2 class="favorite-title">Избранное</h2>
+
+    @if (products && products.length > 0) {
+      <div class="favorite-products">
+        @for (product of products; track $index) {
+          <div class="favorite-product">
+            <div
+              class="favorite-product-image"
+              [style.background-image]="'url(' + serverStaticPath + product.image + ')'"
+            ></div>
+            <div class="favorite-product-name">{{ product.name }}</div>
+            <div class="favorite-product-price">{{ product.price }} BYN</div>
+            <div class="favorite-product-action">
+              @if (!product.countInCart) {
+                <button class="button" (click)="addToCart(product)">В корзину</button>
+              } @else {
+                <button
+                  class="button button-transparent button-in-cart"
+                  (click)="removeFromCart(product)"
+                >
+                  <span> В корзине </span>
+                  <span>Удалить</span>
+                </button>
+                <count-selector
+                  [count]="product.count!"
+                  (onChangeCount)="updateCount($event, product)"
+                ></count-selector>
+              }
+
+              <!-- <button class="button" (click)="addToCart(product.id)">В корзину</button> -->
+            </div>
+            <div class="favorite-product-remove" (click)="removeItem(product.id)">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <line
+                  x1="1.93562"
+                  y1="2.6499"
+                  x2="13.9564"
+                  y2="14.6707"
+                  stroke="#A8ABA7"
+                  stroke-linecap="round"
+                />
+                <line
+                  x1="13.9238"
+                  y1="2.62996"
+                  x2="1.90301"
+                  y2="14.6508"
+                  stroke="#A8ABA7"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </div>
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="favorite-empty">
+        <div>В избранном нет товаров</div>
+        <button class="button" routerLink="/catalog">В каталог</button>
+      </div>
+    }
+  </div>
+</div>

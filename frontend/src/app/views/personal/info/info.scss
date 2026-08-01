@@ -1,0 +1,29 @@
+@import '../../../../../public/styles/variables';
+@import '../../../../../public/styles/mixins';
+@import '../../../../../public/styles/data-form';
+@import '../../../../../public/styles/personal';
+
+.info {
+  padding: 50px 0 128px 0;
+  position: relative;
+  overflow: hidden;
+
+  .container {
+    .data-from {
+      .button {
+        width: 167px;
+      }
+    }
+
+    .page-image {
+      position: absolute;
+      bottom: 0;
+      right: calc(50% - 700px);
+      z-index: -1;
+
+      img {
+        vertical-align: bottom;
+      }
+    }
+  }
+}

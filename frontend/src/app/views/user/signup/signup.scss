@@ -1,0 +1,12 @@
+@import url(../../../../../public/styles/_auth-form.scss);
+
+.signup .container {
+  display: flex;
+  margin-top: 10px;
+  .auth-image {
+    margin-left: 222px;
+    img {
+      vertical-align: bottom;
+    }
+  }
+}

@@ -1,0 +1,202 @@
+@import '../../../../../public/styles/variables';
+@import '../../../../../public/styles/mixins';
+
+.catalog {
+  padding: 50px 0 110px 0;
+
+  .container {
+    .catalog-title {
+      @include head-lora-36;
+      color: $green-color-text;
+      margin-bottom: 33px;
+      margin-left: 317px;
+    }
+
+    .catalog-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-left: 317px;
+
+      .catalog-applied-filters {
+        display: flex;
+        flex-wrap: wrap;
+
+        .catalog-applied-filter {
+          border: 1px solid #e7f1e8;
+          border-radius: 50px;
+          font-size: 16px;
+          color: $gray-color-text;
+          box-sizing: border-box;
+          padding: 8px 14px;
+          margin-right: 20px;
+          margin-bottom: 20px;
+
+          display: flex;
+          align-items: center;
+
+          a {
+            text-decoration: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            margin-left: 8px;
+          }
+        }
+      }
+
+      .catalog-sorting {
+        width: 190px;
+        min-width: 190px;
+        box-sizing: border-box;
+        position: relative;
+        font-size: 16px;
+        cursor: pointer;
+
+        .catalog-sorting-head {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          padding: 12px 0 12px 23px;
+          justify-content: space-between;
+          color: $gray-color-text;
+
+          span {
+            margin-right: 8px;
+          }
+        }
+
+        .catalog-sorting-body {
+          position: absolute;
+          width: 100%;
+          z-index: 3;
+          display: none;
+          padding: 12px 23px;
+          box-sizing: border-box;
+          background: #f5f5f5;
+          border-radius: 0 0 5px 5px;
+          color: #8e8e8e;
+
+          .catalog-sorting-item {
+            margin-bottom: 14px;
+            cursor: pointer;
+            &:last-child {
+              margin-bottom: 0;
+            }
+
+            &.active {
+              color: #313131;
+            }
+          }
+        }
+
+        &.open {
+          width: 257px;
+          min-width: 257px;
+          .catalog-sorting-head {
+            color: #000000;
+            background: #ebebeb;
+            border-radius: 5px 5px 0 0;
+            padding-right: 23px;
+            padding-right: 23px;
+          }
+
+          .catalog-sorting-body {
+            display: block;
+          }
+        }
+      }
+    }
+
+    .catalog-layout {
+      margin-top: 10px;
+      display: flex;
+
+      .catalog-filters {
+        width: 257px;
+        min-width: 257px;
+        margin-right: 58px;
+      }
+
+      .catalog-products {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 26px 30px;
+      }
+
+      .zero-products {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    .pagination {
+      margin-top: 79px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .pagination-arrow {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.disabled {
+          opacity: 0.5;
+        }
+      }
+
+      .pagination-pages {
+        margin-left: 30px;
+        margin-right: 30px;
+        display: flex;
+        align-items: center;
+
+        a.pagination-page {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none;
+          width: 60px;
+          height: 60px;
+          margin-right: 15px;
+          cursor: pointer;
+
+          &.active {
+            border-radius: 50%;
+            background: #b6d5b9;
+          }
+
+          font-size: 20px;
+          color: $gray-color-text;
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+.loader {
+  margin: 60px auto;
+  width: 48px;
+  height: 48px;
+  border: 5px solid #65d4a4;
+  border-bottom-color: #8feac2;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

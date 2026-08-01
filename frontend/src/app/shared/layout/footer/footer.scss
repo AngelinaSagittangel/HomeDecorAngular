@@ -1,0 +1,80 @@
+@import '../../../../../public/styles/variables';
+
+.footer {
+  padding: 39px 0 50px 0;
+  background-color: #648f64;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+
+    .footer-block {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      margin-top: 11px;
+
+      .footer-head {
+        font-weight: 500;
+        color: $gray-color-text;
+        font-size: 16px;
+        text-transform: uppercase;
+      }
+
+      .footer-items ul {
+        display: flex;
+        flex-direction: column;
+        gap: 11px;
+        padding: 0;
+
+        li {
+          list-style: none;
+
+          a {
+            text-decoration: none;
+            color: $gray-color-text;
+          }
+        }
+      }
+
+      .footer-icons {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 30px;
+      }
+
+      .footer-payment {
+        display: grid;
+        grid-template-columns: repeat(3, 70px);
+        gap: 10px;
+        max-width: 230px;
+
+        .payment-item {
+          height: 35px;
+          background-position: top;
+        }
+      }
+
+      &.footer-contacts {
+        gap: 15px;
+        max-width: 253px;
+
+        .footer-head {
+            margin-bottom: 10px;
+        }
+
+        .footer-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+
+            .footer-contact-head {
+                font-weight: 500;
+            }
+        }
+      }
+    }
+  }
+}
