@@ -50,7 +50,6 @@ export class Header implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.searchField.valueChanges.pipe(debounceTime(500)).subscribe((value) => {
       if (value && value.length > 2) {
         this.productService.searchProducts(value).subscribe((data: ProductType[]) => {
@@ -65,6 +64,8 @@ export class Header implements OnInit {
 
     this.authService.isLogged$.subscribe((isLoggedIn: boolean) => {
       this.isLogged = isLoggedIn;
+      this.cartService.getCartCount().subscribe();
+      this.cdr.detectChanges();
     });
 
     this.cartService.getCartCount().subscribe((data: { count: number } | DefaultResponseType) => {
@@ -72,7 +73,9 @@ export class Header implements OnInit {
         const error = (data as DefaultResponseType).message;
         throw new Error(error);
       }
+
       this.count = (data as { count: number }).count;
+      this.cdr.detectChanges();
     });
 
     this.cartService.count$.subscribe((count) => {
@@ -94,11 +97,11 @@ export class Header implements OnInit {
 
   goLogout(): void {
     this.authService.removeTokens();
+    this.cartService.setCount(0);
     this.authService.userId = null;
     this._snackBar.open('Вы успешно вышли из системы!', undefined, { duration: 2500 });
     this.router.navigate(['']);
   }
-
 
   selectProduct(url: string) {
     this.router.navigate(['/product/' + url]);

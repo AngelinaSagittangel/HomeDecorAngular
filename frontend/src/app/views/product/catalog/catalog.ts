@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { ProductCard } from '../../../shared/components/product-card/product-card';
 import { ProductType } from '../../../../types/product.type';
 import { ProductService } from '../../../shared/services/product.service';
@@ -29,6 +29,7 @@ export class Catalog implements OnInit {
   activeParams: ActiveParamsType = { types: [] };
   appliedFilters: AppliedFilterType[] = [];
   sortingOpen = false;
+
   sortingOptions: { name: string; value: string }[] = [
     {
       name: 'От А до Я',
@@ -62,7 +63,17 @@ export class Catalog implements OnInit {
     private cartService: CartService,
     private favoriteService: FavoriteService,
     private authService: AuthService,
+    private elementRef: ElementRef,
   ) {}
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const sortingElement = this.elementRef.nativeElement.querySelector('.catalog-sorting');
+
+    if (!sortingElement.contains(event.target)) {
+      this.sortingOpen = false;
+    }
+  }
 
   ngOnInit(): void {
     this.cartService
@@ -218,7 +229,8 @@ export class Catalog implements OnInit {
     });
   }
 
-  toggleSorting() {
+  toggleSorting(event: MouseEvent) {
+    event.stopPropagation();
     this.sortingOpen = !this.sortingOpen;
   }
 
@@ -247,8 +259,11 @@ export class Catalog implements OnInit {
     }
   }
   openNextPage() {
-    if (this.activeParams.page && this.activeParams.page < this.pages.length) {
-      this.activeParams.page++;
+    const currentPage = this.activeParams.page ?? 1;
+
+    if (currentPage < this.pages.length) {
+      this.activeParams.page = currentPage + 1;
+
       this.router.navigate(['/catalog'], {
         queryParams: this.activeParams,
       });

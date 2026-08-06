@@ -44,7 +44,7 @@
         }
       </div>
 
-      <div class="catalog-sorting" [class.open]="sortingOpen" (click)="toggleSorting()">
+      <div class="catalog-sorting" [class.open]="sortingOpen" (click)="toggleSorting($event)">
         <div class="catalog-sorting-head">
           <span>Сортировать</span>
           <svg
